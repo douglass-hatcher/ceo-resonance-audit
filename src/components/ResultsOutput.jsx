@@ -4,10 +4,13 @@ export default function ResultsOutput({ results, auditType, error, onRestart }) 
   const [email, setEmail] = useState('')
   const [emailSent, setEmailSent] = useState(false)
 
-  const handleEmailSubmit = (e) => {
+  const handleEmailSubmit = async (e) => {
     e.preventDefault()
-    // In production: POST email + results to a backend/email service
-    // For now: acknowledge the submission
+    await fetch('https://formspree.io/f/meerpvvz', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    })
     setEmailSent(true)
   }
 
