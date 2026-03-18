@@ -6,10 +6,10 @@ export default function ResultsOutput({ results, auditType, error, onRestart }) 
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault()
-    await fetch('https://formspree.io/f/meerpvvz', {
+    await fetch('/api/send-report', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, results, auditType }),
     })
     setEmailSent(true)
   }

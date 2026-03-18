@@ -1,7 +1,9 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import Anthropic from '@anthropic-ai/sdk'
+import { Resend } from 'resend'
 import { SYSTEM_PROMPT, buildUserPrompt, parseAnalysisResponse } from './src/lib/analyzeCore.js'
+import { buildEmailHtml } from './src/lib/emailTemplate.js'
 
 export default defineConfig(({ mode }) => {
   // Load all env vars (including non-VITE_ prefixed) from .env.local / .env
@@ -25,6 +27,52 @@ function devApiPlugin(env) {
     apply: 'serve', // only active during `vite dev`, never in builds
 
     configureServer(server) {
+      // ── /api/send-report ──────────────────────────────────────────────────
+      server.middlewares.use('/api/send-report', async (req, res) => {
+        if (req.method !== 'POST') {
+          res.writeHead(405, { 'Content-Type': 'application/json' })
+          res.end(JSON.stringify({ error: 'Method not allowed' }))
+          return
+        }
+
+        try {
+          const chunks = []
+          for await (const chunk of req) chunks.push(chunk)
+          const { email, results, auditType } = JSON.parse(Buffer.concat(chunks).toString())
+
+          if (!email || !results) {
+            res.writeHead(400, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ error: 'email and results are required' }))
+            return
+          }
+
+          const apiKey = env.RESEND_API_KEY
+          if (!apiKey) {
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ error: 'RESEND_API_KEY is not set in .env.local' }))
+            return
+          }
+
+          const resend = new Resend(apiKey)
+          const html = buildEmailHtml({ results, auditType })
+
+          await resend.emails.send({
+            from: 'onboarding@resend.dev',
+            to: email,
+            subject: 'Your CEO Resonance Audit Results',
+            html,
+          })
+
+          res.writeHead(200, { 'Content-Type': 'application/json' })
+          res.end(JSON.stringify({ success: true }))
+        } catch (err) {
+          console.error('[dev-api] /api/send-report error:', err)
+          res.writeHead(500, { 'Content-Type': 'application/json' })
+          res.end(JSON.stringify({ error: err.message || 'Failed to send email' }))
+        }
+      })
+
+      // ── /api/analyze ──────────────────────────────────────────────────────
       server.middlewares.use('/api/analyze', async (req, res) => {
         if (req.method !== 'POST') {
           res.writeHead(405, { 'Content-Type': 'application/json' })
