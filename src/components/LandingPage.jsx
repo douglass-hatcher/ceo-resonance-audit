@@ -13,12 +13,9 @@ export default function LandingPage({ onSelect }) {
       {/* Main content */}
       <main className="flex-1 flex flex-col items-center px-6 py-20">
         <div className="max-w-2xl w-full text-center mb-6">
-          <h1 className="text-4xl md:text-5xl font-semibold text-white leading-tight tracking-tight mb-6">
+          <h1 className="font-semibold text-white leading-tight tracking-tight mb-6" style={{ fontSize: '15px' }}>
             How visible is your CEO compared to the peers competing for the same conversations. Is your CEO's message actually changing how employees work. The CEO Resonance Audit measures both and shows you exactly where to move first.
           </h1>
-          <p className="text-center text-sm" style={{ color: '#00A79D' }}>
-            Built for exec comms professionals. Designed to make every CCO's life measurably easier.
-          </p>
         </div>
 
         {/* Cards */}
@@ -49,21 +46,25 @@ export default function LandingPage({ onSelect }) {
         {/* Prose sections */}
         <div className="max-w-2xl w-full space-y-10 text-slate-400 text-base leading-relaxed">
 
-          <p>
-            Media monitoring tools like Meltwater and Cision track press coverage. Business dashboards like Tableau and Power BI track revenue and KPIs. Nothing has measured whether a CEO's narrative is actually working, where the gaps are, and whether the message is landing internally. Until now.
-          </p>
+          <div>
+            <h3 className="text-white font-bold text-base mb-2">What makes the CEO Resonance Audit different?</h3>
+            <p>Media monitoring tools like Meltwater and Cision track press coverage. Business dashboards like Tableau and Power BI track revenue and KPIs. Nothing has measured whether a CEO's narrative is actually working, where the gaps are, and whether the message is landing internally. Until now.</p>
+          </div>
 
-          <p>
-            Plan for 60 to 90 minutes per audit. This is a serious diagnostic, not a survey. The communications leaders who will find it most useful are the ones who already know their CEO's narrative infrastructure deserves this level of rigor.
-          </p>
+          <div>
+            <h3 className="text-white font-bold text-base mb-2">How long will this take?</h3>
+            <p>Plan for 60 to 90 minutes per audit. This is a serious diagnostic, not a survey. The communications leaders who will find it most useful are the ones who already know their CEO's narrative infrastructure deserves this level of rigor.</p>
+          </div>
 
-          <p>
-            Everything you enter stays in your browser session. Nothing is stored in a database. Nothing is shared. When you close the tab it's gone.
-          </p>
+          <div>
+            <h3 className="text-white font-bold text-base mb-2">What about privacy?</h3>
+            <p>Everything you enter stays in your browser session. Nothing is stored in a database. Nothing is shared. When you close the tab it's gone. If you want a copy of your report, enter your email in the field provided and we'll send it to you. We won't keep your email.</p>
+          </div>
 
-          <p>
-            Currently in Beta. I'm looking for two or three communications leaders willing to run a CEO profile through it and tell me honestly what's wrong with it.
-          </p>
+          <div>
+            <h3 className="text-white font-bold text-base mb-2">Need beta testers like you</h3>
+            <p>Currently in beta. I'm looking for two or three communications leaders willing to run a CEO profile through it and tell me honestly what's wrong with it.</p>
+          </div>
 
           <p className="text-slate-600 text-sm pt-4 border-t border-navy-border">
             Developed by Douglass Hatcher. Built on 15 years of executive communications practice across Fortune 200, U.S. Senate, and higher education environments.
