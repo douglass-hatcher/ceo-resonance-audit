@@ -13,8 +13,10 @@ export default function LandingPage({ onSelect }) {
       {/* Main content */}
       <main className="flex-1 flex flex-col items-center px-6 py-20">
         <div className="max-w-2xl w-full text-center mb-6">
-          <h1 className="font-semibold text-white leading-tight tracking-tight mb-6" style={{ fontSize: '15px' }}>
-            How visible is your CEO compared to the peers competing for the same conversations. Is your CEO's message actually changing how employees work. The CEO Resonance Audit measures both and shows you exactly where to move first.
+          <h1 className="font-semibold text-white leading-tight tracking-tight mb-6" style={{ fontSize: '18px' }}>
+            <span className="block">How visible is your CEO compared to the peers competing for the same conversations?</span>
+            <span className="block">Is your CEO's message actually changing how employees work?</span>
+            <span className="block" style={{ marginTop: '24px' }}>The CEO Resonance Audit measures both and shows you exactly where to move first.</span>
           </h1>
         </div>
 
