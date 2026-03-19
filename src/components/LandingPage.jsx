@@ -13,8 +13,8 @@ export default function LandingPage({ onSelect }) {
       {/* Main content */}
       <main className="flex-1 flex flex-col items-center px-6 py-20">
         <div className="w-full text-center mb-6">
-          <h1 className="font-semibold text-white leading-tight tracking-tight mb-6 mx-auto" style={{ fontSize: '19px', maxWidth: '600px' }}>
-            Measure Your CEO's Visibility Against Peers and Message Clarity with Your Workforce
+          <h1 className="font-semibold text-white leading-tight tracking-tight mb-6 mx-auto" style={{ fontSize: '20px' }}>
+            Measure Your CEO's Visibility Against Peers and<br />Message Clarity with Your Workforce
           </h1>
         </div>
 
